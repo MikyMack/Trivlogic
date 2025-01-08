@@ -1103,6 +1103,7 @@ const dsnParam = {
           rotation: 8,
           scale: 1.1
         }
+        
       };
       const current = Number.parseInt(newNum, 10) + 1,
             num = this.querySelector(".slider-current-index");
@@ -1263,58 +1264,72 @@ const dsnParam = {
     $el.find(".main-slider:not(.dsn-swiper-initialized)").each(function () {
       this.classList.add('dsn-swiper-initialized');
       initSlider.bind(this)().then(swiper.bind(this)).then(function (swiper) {
-        const handleNext = function () {
-          if (tl.isActive()) return;
-
-          if (swiper.slides.length === swiper.activeIndex + 1 && !swiper.passedParams.loop) {
-            swiper.slideTo(0);
-          } else {
-            swiper.slideNext();
+          const handleNext = function () {
+              if (tl.isActive()) return;
+  
+              if (swiper.slides.length === swiper.activeIndex + 1 && !swiper.passedParams.loop) {
+                  swiper.slideTo(0); // If the last slide, go back to the first slide
+              } else {
+                  swiper.slideNext(); // Go to the next slide
+              }
+          },
+          handlePrev = function () {
+              if (tl.isActive()) return;
+  
+              if (swiper.activeIndex === 0 && !swiper.passedParams.loop) {
+                  swiper.slideTo(swiper.slides.length); 
+              } else {
+                  swiper.slidePrev(); 
+              }
+          },
+          nextArrow = $(this).find('.next-arrow'),
+          prevArrow = $(this).find('.prev-arrow');
+  
+          // Set up the manual next/prev navigation
+          if (nextArrow.length) nextArrow.on('click', handleNext);
+          if (prevArrow.length) prevArrow.on('click', handlePrev);
+          
+    
+          const nav = NavSwiper(this, swiper);
+          const navPrev = NavSwiperPrev(this, swiper, nav);
+  
+          let webGel = null;
+          if (this.classList.contains('dsn-webgl')) {
+              webGel = dsnGrid.WebGLDistortionHoverEffects({
+                  imgs: webGelOption.bind(this)(),
+                  ...(dsnGrid.getData(this, 'webgl', {}) || {}),
+                  direction: swiper.params.direction,
+                  parent: this.querySelector('.bg-container'),
+                  swiper,
+  
+                  onStart({
+                      parent,
+                      item
+                  }) {
+                      parent.setAttribute('data-overlay', item.overlay);
+                  }
+  
+              });
           }
-        },
-              handlePrev = function () {
-          if (tl.isActive()) return;
-
-          if (swiper.activeIndex === 0 && !swiper.passedParams.loop) {
-            swiper.slideTo(swiper.slides.length);
-          } else {
-            swiper.slidePrev();
-          }
-        },
-              nextArrow = $(this).find('.next-arrow'),
-              prevArrow = $(this).find('.prev-arrow');
-
-        if (nextArrow.length) nextArrow.on('click', handleNext);
-        if (prevArrow.length) prevArrow.on('click', handlePrev);
-        const nav = NavSwiper(this, swiper);
-        const navPrev = NavSwiperPrev(this, swiper, nav);
-        let webGel = null;
-        if (this.classList.contains('dsn-webgl')) webGel = dsnGrid.WebGLDistortionHoverEffects({
-          imgs: webGelOption.bind(this)(),
-          ...(dsnGrid.getData(this, 'webgl', {}) || {}),
-          direction: swiper.params.direction,
-          parent: this.querySelector('.bg-container'),
-          swiper,
-
-          onStart({
-            parent,
-            item
-          }) {
-            parent.setAttribute('data-overlay', item.overlay);
-          }
-
-        });
-        dsnGrid.killAjax(function () {
-          if (nextArrow.length) nextArrow.off('click', handleNext);
-          if (prevArrow.length) prevArrow.off('click', handlePrev);
-          tl.kill();
-          swiper.destroy();
-          webGel.destroy();
-          if (nav) nav.destroy();
-          if (navPrev) navPrev.destroy();
-        });
+  
+          // Automatically move to the next slide every 2 seconds
+          setInterval(() => {
+              handleNext();  
+          }, 3500);  
+  
+        
+          dsnGrid.killAjax(function () {
+              if (nextArrow.length) nextArrow.off('click', handleNext);
+              if (prevArrow.length) prevArrow.off('click', handlePrev);
+              tl.kill();
+              swiper.destroy();
+              webGel.destroy();
+              if (nav) nav.destroy();
+              if (navPrev) navPrev.destroy();
+          });
       }.bind(this));
-    });
+  });
+  
   }
 
   function mouseCirMove($off) {
