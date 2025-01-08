@@ -625,7 +625,11 @@ body:not(.dsn-cursor-effect) #dsn_cursor, body:not(.dsn-cursor-effect) #dsn_curs
 .dsn-align-center > * {
   width: 100%;
 }
-
+.box-info1{
+  background-color: var(--logo-color);
+  color: white!important;
+  border-radius: 0 30px 0px 30px;
+}
 @media only screen and (max-width: 991px) {
   .left-box-image.mb-section, .box-info.mt-section {
     --margin-padding: 0;
@@ -4195,6 +4199,10 @@ ul.intro-project-list li h5.title-list-project + p.description-list-project {
 
 .dsn-service .service_title {
   text-transform: uppercase;
+
+}
+.service_title1{
+  color: white;
 }
 .dsn-service .service-item-inner.border-style:not(.p-20), .dsn-service .service-item-inner.background-theme, .dsn-service .service-item-inner.background-main, .dsn-service .service-item-inner.background-section {
   padding: 60px 30px;
@@ -4251,6 +4259,9 @@ ul.intro-project-list li h5.title-list-project + p.description-list-project {
   order: 2;
   margin-left: 20px;
 }
+.service_description1 p{
+  color: rgb(246, 244, 244);
+}
 @media only screen and (min-width: 992px) {
   .service-with-img .dsn-service .service-item {
     position: relative;
@@ -4261,7 +4272,7 @@ ul.intro-project-list li h5.title-list-project + p.description-list-project {
     background-color: transparent;
   }
   .service-with-img .dsn-service .service-item .service_description {
-    color: var(--heading-color);
+    color:white!important;
   }
   .service-with-img .dsn-service .service-item, .service-with-img .dsn-service .service-item .dsn-def-btn {
     justify-content: center;
@@ -4795,6 +4806,7 @@ ul.intro-project-list li h5.title-list-project + p.description-list-project {
   align-items: center;
   flex-direction: column;
 }
+
 .right-box-image .box-info {
   position: relative;
 }
