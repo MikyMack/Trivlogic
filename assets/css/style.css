@@ -2568,6 +2568,9 @@ a:hover, a:active {
 .section_description1{
   width: 100%!important;
 }
+.prj-date{
+  font-size: 10px;
+}
 .dsn-style-cards .dsn-posts.box-image-normal .section_description {
   width: 90%;
 }
