@@ -4047,7 +4047,9 @@ ul.dsn-list .list-item.background-main, ul.dsn-list .list-item .background-secti
 .dsn-background-inherit .background-theme .dsn-bg, .dsn-background-inherit .background-theme .dsn-bg-after:after, .dsn-background-inherit .background-theme .dsn-bg-before:before, .dsn-background-inherit.background-theme .dsn-bg, .dsn-background-inherit.background-theme .dsn-bg-after:after, .dsn-background-inherit.background-theme .dsn-bg-before:before, .dsn-def-btn .background-theme .dsn-bg, .dsn-def-btn .background-theme .dsn-bg-after:after, .dsn-def-btn .background-theme .dsn-bg-before:before, .dsn-def-btn.background-theme .dsn-bg, .dsn-def-btn.background-theme .dsn-bg-after:after, .dsn-def-btn.background-theme .dsn-bg-before:before {
   background-color: var(--theme-color);
 }
-
+.abt-crd{
+  background-color: var(--assistant-color);
+}
 .background-revere {
   background-color: var(--assistant-color);
 }
