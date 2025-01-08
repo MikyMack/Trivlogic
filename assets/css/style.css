@@ -1,14 +1,5 @@
 @charset "UTF-8";
-/*-----------------------------------------------------------
 
-Template Name: BlackDsn - Ajax Portfolio HTML Template
-  Template URI: http://theme.dsngrid.com/blackdsn
-  Description: BlackDsn Ajax Portfolio Showcase HTML Template
-  Author: design_grid
-  Author URI: https://themeforest.net/user/design_grid
-  Version: 1.0.0
-
--------------------------------------------------------------*/
 /*-----------------------------------------------------------
 
     1.  Variables
@@ -51,6 +42,7 @@ Template Name: BlackDsn - Ajax Portfolio HTML Template
   --reverse-color: #141414;
   --reverse-heading-color: #fff;
   --bg-btn: #f6fafd;
+  --logo-color:#3883c4;
   /**
      Elementor color
   */
@@ -68,10 +60,12 @@ Template Name: BlackDsn - Ajax Portfolio HTML Template
   --reverse-color: #f9f9f9;
   --reverse-heading-color: #000;
   --bg-btn: #0a0909;
+ 
 }
 :root .v-dark .background-theme, :root .v-dark.background-theme, :root .v-dark-head .background-theme, :root .v-dark-head.background-theme {
   --font-color: #0009;
   --heading-color: #000;
+  
 }
 
 @media only screen and (max-width: 991px) {
@@ -483,7 +477,9 @@ body:not(.dsn-cursor-effect) #dsn_cursor, body:not(.dsn-cursor-effect) #dsn_curs
 .bg-load svg.dsn-separator-top {
   transform: translateY(-148px) rotate(180deg);
 }
-
+.sub-section-title h2 ,.box-right h3{
+  color: var(--logo-color);
+}
 .dsn-heading-title.p-10 {
   padding-top: 5px;
   padding-bottom: 5px;
@@ -598,6 +594,7 @@ body:not(.dsn-cursor-effect) #dsn_cursor, body:not(.dsn-cursor-effect) #dsn_curs
   font-weight: 600;
   line-height: 90px;
 }
+
 
 .bg-dots:not(.dsn-btn, .service-item, .service-item-inner), .bg-dots .background-section:not(.dsn-btn, .service-item, .service-item-inner), .bg-dots .background-main:not(.dsn-btn, .service-item, .service-item-inner), .bg-dots .background-theme:not(.dsn-btn, .service-item, .service-item-inner) {
   background-image: url("../img/bg-dot.png");
@@ -3873,7 +3870,17 @@ img:not(.dsn-lazy-loading) {
 .dsn-ajax-effect {
   overflow: hidden;
 }
+.dsn-icon{
+  overflow: hidden;
 
+}
+.dsn-icon img {
+  transition: transform 0.3s ease; /* Smooth transition for zoom effect */
+}
+
+.dsn-icon img:hover {
+  transform: scale(1.1); /* Zoom in the image by 10% */
+}
 .dsn-icon i {
   font-size: var(--dsn-icon-size, 20px);
   color: var(--dsn-color-icon, var(--theme-color));
@@ -3883,7 +3890,7 @@ img:not(.dsn-lazy-loading) {
   height: var(--dsn-icon-size, 20px);
 }
 .dsn-icon svg, .dsn-icon svg path {
-  fill: var(--dsn-color-icon, var(--theme-color));
+  fill: var(--logo-color);
 }
 .text-center .dsn-icon {
   margin: 0 auto;
@@ -3984,7 +3991,10 @@ img:not(.dsn-lazy-loading) {
   position: absolute;
   line-height: initial;
 }
-
+.ser-icon{
+  width: 60px;
+  height: 60px;
+}
 ul.dsn-list {
   list-style: none;
   --dsn-icon-size: 13px;
@@ -4037,7 +4047,9 @@ ul.dsn-list .list-item.background-main, ul.dsn-list .list-item .background-secti
 .dsn-background-inherit .background-theme .dsn-bg, .dsn-background-inherit .background-theme .dsn-bg-after:after, .dsn-background-inherit .background-theme .dsn-bg-before:before, .dsn-background-inherit.background-theme .dsn-bg, .dsn-background-inherit.background-theme .dsn-bg-after:after, .dsn-background-inherit.background-theme .dsn-bg-before:before, .dsn-def-btn .background-theme .dsn-bg, .dsn-def-btn .background-theme .dsn-bg-after:after, .dsn-def-btn .background-theme .dsn-bg-before:before, .dsn-def-btn.background-theme .dsn-bg, .dsn-def-btn.background-theme .dsn-bg-after:after, .dsn-def-btn.background-theme .dsn-bg-before:before {
   background-color: var(--theme-color);
 }
-
+.abt-crd{
+  background-color: var(--assistant-color);
+}
 .background-revere {
   background-color: var(--assistant-color);
 }
@@ -4186,6 +4198,9 @@ ul.intro-project-list li h5.title-list-project + p.description-list-project {
 }
 .dsn-service .service-item-inner.border-style:not(.p-20), .dsn-service .service-item-inner.background-theme, .dsn-service .service-item-inner.background-main, .dsn-service .service-item-inner.background-section {
   padding: 60px 30px;
+  background-color: var(--bg-color, var(--heading-color));
+  border-radius: 20px;
+
 }
 .dsn-service .number-item:before {
   right: 45px;
@@ -4346,7 +4361,8 @@ ul.intro-project-list li h5.title-list-project + p.description-list-project {
     margin-bottom: 30px;
   }
   .image-left-style .dsn-testimonials .testimonial-inner .swiper-slide > .avatar, .image-left-style .dsn-testimonials .testimonial-inner .swiper-slide > .avatar img {
-    border-radius: 50%;
+    border-radius: 20%;
+    object-fit: contain;
   }
 }
 @media only screen and (max-width: 767px) {
