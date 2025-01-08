@@ -4373,9 +4373,13 @@ ul.intro-project-list li h5.title-list-project + p.description-list-project {
 .dsn-testimonials .content-inner .avatar {
   width: 60px;
   height: 60px;
+
 }
 .dsn-testimonials .content-inner .avatar, .dsn-testimonials .content-inner .avatar img {
   border-radius: 50%;
+
+
+
 }
 .dsn-testimonials .content-inner .avatar + .box-text {
   margin-left: 10px;
