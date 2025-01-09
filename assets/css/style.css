@@ -2565,6 +2565,9 @@ a:hover, a:active {
 .dsn-style-cards .dsn-posts.box-image-normal .box-image-bg {
   height: 70vh;
 }
+.ser-sub-title{
+  color: var(--logo-color);
+}
 .section_description1{
   width: 100%!important;
 }
@@ -4595,6 +4598,8 @@ ul.intro-project-list li h5.title-list-project + p.description-list-project {
   text-align: center;
   margin-right: 15px;
   font-size: 14px;
+  background-color: var(--logo-color)!important;
+  color: white;
 }
 .background-theme .dsn-accordion .number {
   background-color: var(--bg-color);
@@ -4938,12 +4943,15 @@ ul.intro-project-list li h5.title-list-project + p.description-list-project {
     line-height: 120px;
   }
 }
+.about-section.about-3 .experience .exp-number{
+  font-size: 80px;
+}
 @media only screen and (max-width: 991px) {
   .about-section.about-3 .experience {
     padding: 15px;
   }
   .about-section.about-3 .experience .exp-number {
-    font-size: 90px;
+    font-size: 80px;
     line-height: 90px;
   }
   .about-section.about-3 .experience .title-block {
