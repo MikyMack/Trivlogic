@@ -626,7 +626,11 @@ body:not(.dsn-cursor-effect) #dsn_cursor, body:not(.dsn-cursor-effect) #dsn_curs
 .dsn-align-center > * {
   width: 100%;
 }
-
+.box-info1{
+  background-color: var(--logo-color);
+  color: white!important;
+  border-radius: 0 30px 0px 30px;
+}
 @media only screen and (max-width: 991px) {
   .left-box-image.mb-section, .box-info.mt-section {
     --margin-padding: 0;
@@ -2565,6 +2569,15 @@ a:hover, a:active {
 .dsn-style-cards .dsn-posts.box-image-normal .box-image-bg {
   height: 70vh;
 }
+.ser-sub-title{
+  color: var(--logo-color);
+}
+.section_description1{
+  width: 100%!important;
+}
+.prj-date{
+  font-size: 10px;
+}
 .dsn-style-cards .dsn-posts.box-image-normal .section_description {
   width: 90%;
 }
@@ -4199,6 +4212,10 @@ ul.intro-project-list li h5.title-list-project + p.description-list-project {
 
 .dsn-service .service_title {
   text-transform: uppercase;
+
+}
+.service_title1{
+  color: white;
 }
 .dsn-service .service-item-inner.border-style:not(.p-20), .dsn-service .service-item-inner.background-theme, .dsn-service .service-item-inner.background-main, .dsn-service .service-item-inner.background-section {
   padding: 60px 30px;
@@ -4255,6 +4272,9 @@ ul.intro-project-list li h5.title-list-project + p.description-list-project {
   order: 2;
   margin-left: 20px;
 }
+.service_description1 p{
+  color: rgb(246, 244, 244);
+}
 @media only screen and (min-width: 992px) {
   .service-with-img .dsn-service .service-item {
     position: relative;
@@ -4265,7 +4285,7 @@ ul.intro-project-list li h5.title-list-project + p.description-list-project {
     background-color: transparent;
   }
   .service-with-img .dsn-service .service-item .service_description {
-    color: var(--heading-color);
+    color:white!important;
   }
   .service-with-img .dsn-service .service-item, .service-with-img .dsn-service .service-item .dsn-def-btn {
     justify-content: center;
@@ -4377,9 +4397,13 @@ ul.intro-project-list li h5.title-list-project + p.description-list-project {
 .dsn-testimonials .content-inner .avatar {
   width: 60px;
   height: 60px;
+
 }
 .dsn-testimonials .content-inner .avatar, .dsn-testimonials .content-inner .avatar img {
   border-radius: 50%;
+
+
+
 }
 .dsn-testimonials .content-inner .avatar + .box-text {
   margin-left: 10px;
@@ -4578,6 +4602,8 @@ ul.intro-project-list li h5.title-list-project + p.description-list-project {
   text-align: center;
   margin-right: 15px;
   font-size: 14px;
+  background-color: var(--logo-color)!important;
+  color: white;
 }
 .background-theme .dsn-accordion .number {
   background-color: var(--bg-color);
@@ -4795,6 +4821,7 @@ ul.intro-project-list li h5.title-list-project + p.description-list-project {
   align-items: center;
   flex-direction: column;
 }
+
 .right-box-image .box-info {
   position: relative;
 }
@@ -4920,12 +4947,15 @@ ul.intro-project-list li h5.title-list-project + p.description-list-project {
     line-height: 120px;
   }
 }
+.about-section.about-3 .experience .exp-number{
+  font-size: 80px;
+}
 @media only screen and (max-width: 991px) {
   .about-section.about-3 .experience {
     padding: 15px;
   }
   .about-section.about-3 .experience .exp-number {
-    font-size: 90px;
+    font-size: 80px;
     line-height: 90px;
   }
   .about-section.about-3 .experience .title-block {
