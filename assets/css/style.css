@@ -4969,6 +4969,11 @@ ul.intro-project-list li h5.title-list-project + p.description-list-project {
   position: relative;
   z-index: 1;
 }
+
+
+
+
+
 @media only screen and (min-width: 768px) {
   .about-one .box-info .title .text-right {
     padding-left: 50%;
@@ -5005,6 +5010,86 @@ ul.intro-project-list li h5.title-list-project + p.description-list-project {
   .about-one .bg-mask, .about-one .box-img {
     display: none;
   }
+
+  .bottom-navbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+     height: 4.5rem;
+    z-index: 10000;
+    background-color: #fffdfd; /* White background */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Light shadow */
+}
+.navbar-nav{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 1.2rem;
+}
+.bottom-navbar .nav-link {
+    color: black!important;
+    font-size: 23px;
+    width: 28px;
+    height: 28px;
+}
+
+.copy{
+  margin-bottom: 2.6rem;
+}
+.dsn-header-animation{
+  margin-top: 0px;
+}
+.entry-header {
+  margin-top: -8rem;
+}
+.ser-title{
+  margin-top: 6rem;
+}
+
+/* new */
+/* From Uiverse.io by akshat-patel28 */ 
+.button-container {
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+   height: 4.5rem;
+  z-index: 10;
+  background-color: rgb(27, 133, 219);
+  width: 100%;
+  height: 65px;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px,
+    rgba(27, 133, 219, 0.5) 5px 10px 15px;
+}
+
+.button {
+  outline: 0 !important;
+  border: 0 !important;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  transition: all ease-in-out 0.3s;
+  cursor: pointer;
+}
+
+.button:hover {
+  transform: translateY(-3px);
+}
+
+.icon {
+  font-size: 20px;
+}
+  
 }
 
 .about-2 img {
