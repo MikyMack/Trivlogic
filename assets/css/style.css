@@ -6906,6 +6906,7 @@ body.tax-product_tag #dsn_header, body.tax-product_cat #dsn_header {
     .scene-bg {
         width: 150%;
         min-width: 1500px;
+        height: 200%; /* Increased height */
     }
 
     [class^="scene-mountain-"] {
