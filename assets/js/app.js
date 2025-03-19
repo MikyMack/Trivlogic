@@ -1,14 +1,12 @@
-const parallax_el = document.querySelectorAll(".scene-element");
-
 let xValue = 0, yValue = 0;
 
 // Calculate background width based on viewport
 const calculateBackgroundWidth = () => {
     const viewportWidth = window.innerWidth;
-    return Math.max(viewportWidth * 2, 1920); // Minimum width of 1920px
+    return Math.max(viewportWidth * 2, 1920); 
 };
 
-// Set initial background width
+//  initial background width
 const bgElement = document.querySelector(".scene-bg");
 bgElement.style.width = `${calculateBackgroundWidth()}px`;
 
@@ -17,9 +15,9 @@ window.addEventListener("resize", () => {
     bgElement.style.width = `${calculateBackgroundWidth()}px`;
 });
 
-window.addEventListener("mousemove", (e) => {
-    xValue = e.clientX - window.innerWidth/2;
-    yValue = e.clientY - window.innerHeight/2;
+// Function to update the parallax effect
+function updateParallax() {
+    const parallax_el = document.querySelectorAll(".scene-element");
     
     parallax_el.forEach(el => {
         let speedx = el.dataset.speedx;
@@ -35,24 +33,58 @@ window.addEventListener("mousemove", (e) => {
                              translateX(${xValue * speedx}px) 
                              translateY(${yValue * speedy}px)`;
     });
+}
+
+// Update the parallax effect when the mouse is moved
+window.addEventListener("mousemove", (e) => {
+    xValue = e.clientX - window.innerWidth/2;
+    yValue = e.clientY - window.innerHeight/2;
+    updateParallax();
 });
 
-let timeline = gsap.timeline();
 
-// Smoother background entry
-timeline.from(".scene-bg", {
-    y: "-30%",
-    scale: 1.2,
-    duration: 2,
-    ease: "power2.out"
-});
+function createTimeline() {
+    let timeline = gsap.timeline();
 
-parallax_el.forEach(el => {
-    if (!el.classList.contains('scene-bg')) {
-        timeline.from(el, {
-            top: "100%", 
-            duration: 1.5,
-            ease: "power2.out"
-        }, "<0.1");
+
+    timeline.from(".scene-bg", {
+        y: "-30%",
+        scale: 1.2,
+        duration: 2,
+        ease: "power2.out"
+    });
+
+    const parallax_el = document.querySelectorAll(".scene-element");
+    parallax_el.forEach(el => {
+        if (!el.classList.contains('scene-bg')) {
+            timeline.from(el, {
+                top: "100%", 
+                duration: 1.5,
+                ease: "power2.out"
+            }, "<0.1");
+        }
+    });
+}
+
+
+function initializeParallax() {
+    createTimeline();
+    updateParallax();
+}
+
+
+document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") {
+        initializeParallax();
     }
 });
+
+
+window.addEventListener("popstate", () => {
+    initializeParallax();
+});
+
+
+window.onload = () => {
+    initializeParallax();
+};
