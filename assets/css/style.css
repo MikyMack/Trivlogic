@@ -2609,7 +2609,7 @@ color: rgb(49, 136, 230);
   & .btn {
     background-color: rgba(216, 216, 216, 0.5);
     color: white;
-    border: 2px solid rgba(240, 240, 240, 0.6);
+    border: 2px solid rgba(13, 73, 178, 0.6);
     margin: 0 0.25rem;
     padding: 0.75rem;
     border-radius: 50%;
@@ -2640,10 +2640,9 @@ color: rgb(49, 136, 230);
 
 @media (width < 650px) {
   .content-pr {
- top: 80%;
- width: 90%;
-    & .title        { font-size: 1.5rem; }
-    & .description  { font-size: 0.9rem; }
+      padding: 0;
+    & .title        { font-size: .9rem; }
+    & .description  { font-size: 0.65rem; }
     & button        { font-size: 0.7rem; margin-left: 0; }
   }
   .item {
@@ -2711,6 +2710,9 @@ color: rgb(49, 136, 230);
   .dsn-posts.use-horizontal-scroll .start-section, .dsn-posts.use-horizontal-scroll .end-section {
     display: none;
   }
+  .section_description1{
+    font-size: 10px;
+  }
 }
 .dsn-posts .metas {
   margin-bottom: 0;
@@ -2734,8 +2736,14 @@ color: rgb(49, 136, 230);
 .ser-sub-title{
   color: var(--logo-color);
 }
+.pro-texts{
+max-width: 100%!important;
+padding: 0px!important;
+}
 .section_description1{
   width: 100%!important;
+  line-height: normal;
+
 }
 .prj-date{
   font-size: 10px;
@@ -2851,6 +2859,9 @@ color: rgb(49, 136, 230);
   .dsn-style-cards .dsn-posts.box-image-blackdsn .box-content .dsn-post-link, .dsn-style-cards .dsn-posts.box-image-blackdsn .box-content:before {
     display: none;
   }
+  .section_description1{
+    font-size: .6rem;
+  }
 }
 .dsn-style-cards .dsn-posts.box-content-hover {
   counter-reset: compteListe;
@@ -2872,6 +2883,7 @@ color: rgb(49, 136, 230);
     padding-right: 30px;
     padding-left: 60px;
   }
+ 
   .dsn-style-cards .dsn-posts.box-content-hover .post-content .post-title-info .post-meta {
     order: 1;
     margin-top: 15px;
@@ -4407,6 +4419,7 @@ ul.intro-project-list li h5.title-list-project + p.description-list-project {
   .dsn-service .service-item.border-left {
     border-width: 0;
   }
+
 }
 .dsn-service .service-item.border-bottom {
   padding-bottom: 40px;
@@ -5069,8 +5082,48 @@ ul.intro-project-list li h5.title-list-project + p.description-list-project {
   .section-move-image {
     --dsn-width-item: 1.5;
   }
-}
+  .box-under-img{
+    padding-top: 3rem;
+  }
+  .ser-sub-title{
+    margin-top: 2rem;
+  }
+  .service-content {
+    padding-bottom: 2rem;
+  }
 
+}
+.video-banner{
+  width: 100%;
+  height: 100vh;
+
+
+}
+@media only screen and (max-width: 991px) {
+  .section_description1{
+    font-size:10px;
+}
+}
+@media only screen and (max-width: 767px) {
+  #ser-title{
+
+    font-size: 40px;
+   
+   }
+   .section_description1{
+    font-size:.6rem;
+}
+  .box-under-img{
+    padding-top: 3rem;
+  }
+  .ser-sub-title{
+    margin-top: 2rem;
+  }
+  .service-content {
+    padding-bottom: 2rem;
+  }
+
+}
 .about-section .box-creative {
   padding: 0 0 30px 60px;
 }
@@ -5207,8 +5260,10 @@ ul.intro-project-list li h5.title-list-project + p.description-list-project {
 .entry-header {
   margin-top: -8rem;
 }
-.ser-title{
-  margin-top: 6rem;
+#ser-title{
+
+ font-size: 40px;
+
 }
 
 /* new */

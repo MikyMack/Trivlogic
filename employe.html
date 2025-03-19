@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Details</title>
+    <style>
+        :root {
+            --primary: #1a365d;
+            --primary-light: #2c5282;
+            --secondary: #e2e8f0;
+            --accent: #4299e1;
+            --text-dark: #2d3748;
+            --text-light: #718096;
+            --text-lighter: #a0aec0;
+            --present: #22c55e;
+            --absent: #ef4444;
+            --late: #f59e0b;
+            --leave: #8b5cf6;
+
+            --white: #ffffff;
+            --gray-50: #f7fafc;
+            --gray-100: #edf2f7;
+            --gray-200: #e2e8f0;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        body {
+            background-color: var(--gray-50);
+            color: var(--text-dark);
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+        
+        .container {
+            display: flex;
+
+   
+            height: 100vh;
+        }
+        
+        .sidebar {
+            width: 280px;
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 2rem 1.5rem;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--accent);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+        
+        .nav-menu {
+            list-style: none;
+            margin-top: 1rem;
+        }
+        
+        .nav-item {
+            margin-bottom: 0.5rem;
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .nav-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-item.active {
+            background-color: var(--accent);
+        }
+        
+        .nav-icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--gray-200);
+        }
+        
+        .header-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .search {
+            position: relative;
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+        }
+        
+        .search-input {
+            padding: 0.6rem 1rem 0.6rem 2.5rem;
+            border: 1px solid var(--gray-200);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            width: 250px;
+            background-color: var(--white);
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.15);
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            cursor: pointer;
+        }
+        
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-light);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+        
+        .user-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .user-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .user-role {
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        
+        @media (max-width: 1280px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .employee-card {
+            background-color: var(--white);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+        
+        .employee-header {
+            background: linear-gradient(120deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: var(--white);
+            padding: 2rem;
+            position: relative;
+        }
+        
+        .employee-actions {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .action-button {
+            background-color: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 6px;
+            width: 34px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        
+        .action-button:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .employee-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 1.5rem;
+        }
+        
+        .employee-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+        
+        .employee-position {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+        
+        .employee-status {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .employee-details {
+            padding: 2rem;
+        }
+        
+        .details-group {
+            margin-bottom: 2rem;
+        }
+        
+        .details-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+        
+        .info-label {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+        
+        .info-value {
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        
+        .calendar-card {
+            background-color: var(--white);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            width: 100%;
+            
+        }
+        
+        .calendar-header {
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--gray-200);
+        }
+        
+        .calendar-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .calendar-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .calendar-button {
+            background-color: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: 6px;
+            padding: 0.5rem 0.75rem;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .calendar-button:hover {
+            background-color: var(--gray-100);
+        }
+        
+        .calendar-button.active {
+            background-color: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+        }
+        
+        .calendar {
+            padding: 1.5rem;
+        }
+        
+        .month-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .month-display {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        .month-arrows {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .month-arrow {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .month-arrow:hover {
+            background-color: var(--gray-100);
+        }
+        
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.5rem;
+        }
+        
+        .calendar-day-header {
+            text-align: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-light);
+            padding: 0.5rem 0;
+        }
+        
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            font-weight: 500;
+        }
+        
+        .calendar-day:hover {
+            background-color: var(--gray-100);
+        }
+        
+        .calendar-day.inactive {
+            color: var(--text-lighter);
+        }
+        
+        .calendar-day.today {
+            background-color: var(--accent);
+            color: var(--white);
+        }
+        
+        .calendar-day.selected {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+        
+        .calendar-day.present {
+            border: 2px solid var(--present);
+        }
+        
+        .calendar-day.absent {
+            border: 2px solid var(--absent);
+        }
+        
+        .calendar-day.late {
+            border: 2px solid var(--late);
+        }
+        
+        .calendar-day.leave {
+            border: 2px solid var(--leave);
+        }
+        
+        .calendar-event {
+            position: absolute;
+            bottom: 4px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+        }
+        
+        .calendar-event.present {
+            background-color: var(--present);
+        }
+        
+        .calendar-event.absent {
+            background-color: var(--absent);
+        }
+        
+        .calendar-event.late {
+            background-color: var(--late);
+        }
+        
+        .calendar-event.leave {
+            background-color: var(--leave);
+        }
+        
+        .attendance-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        .attendance-modal.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .attendance-dialog {
+            background-color: var(--white);
+            border-radius: 12px;
+            padding: 1.5rem;
+            width: 90%;
+            max-width: 320px;
+            box-shadow: var(--shadow);
+        }
+        
+        .attendance-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .attendance-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        .attendance-close {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+        
+        .attendance-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        
+        .attendance-option {
+            padding: 0.75rem;
+            border-radius: 6px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            color: white!important;
+            background-color: #4299e1!important;
+        }
+        
+        .attendance-option:hover {
+            transform: translateY(-2px);
+        }
+        
+        .attendance-option.present {
+            background-color: var(--present);
+            color: white;
+        }
+        
+        .attendance-option.absent {
+            background-color: var(--absent);
+            color: white;
+        }
+        
+        .attendance-option.late {
+            background-color: var(--late);
+            color: white;
+        }
+        
+        .attendance-option.leave {
+            background-color: var(--leave);
+            color: white;
+        }
+        
+        .attendance-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.75rem;
+        }
+        
+        .attendance-button {
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        .attendance-button.cancel {
+            background-color: var(--gray-200);
+        }
+        
+        .attendance-button.save {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .legend {
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: var(--gray-100);
+            border-radius: 8px;
+        }
+        
+        .legend-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .legend-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .legend-color.present {
+            background-color: var(--present);
+        }
+        
+        .legend-color.absent {
+            background-color: var(--absent);
+        }
+        
+        .legend-color.late {
+            background-color: var(--late);
+        }
+        
+        .legend-color.leave {
+            background-color: var(--leave);
+        }
+        
+        .events-list {
+            padding: 1.5rem;
+            border-top: 1px solid var(--gray-200);
+        }
+        
+        .events-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .event-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            background-color: var(--gray-50);
+            margin-bottom: 0.75rem;
+        }
+        
+        .event-time {
+            padding: 0.5rem;
+            background-color: var(--white);
+            border-radius: 6px;
+            text-align: center;
+            min-width: 60px;
+        }
+        
+        .time-value {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .time-period {
+            font-size: 0.7rem;
+            color: var(--text-light);
+        }
+        
+        .event-details {
+            flex: 1;
+        }
+        
+        .event-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .event-location {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        
+        @media (max-width: 1024px) {
+            .container {
+                flex-direction: column;
+                height: auto;
+            }
+            
+            .sidebar {
+                width: 100%;
+                padding: 1.5rem;
+            }
+            
+            .nav-menu {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+            
+            .nav-item {
+                flex: 1;
+                min-width: 120px;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-icon">T</div>
+                <div class="logo-text">Trivlogic</div>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <div class="nav-icon">D</div>
+                    <span>Dashboard</span>
+                </li>
+                <li class="nav-item active">
+                    <div class="nav-icon">E</div>
+                    <span>Employees</span>
+                </li>
+                <li class="nav-item">
+                    <div class="nav-icon">P</div>
+                    <span>Projects</span>
+                </li>
+            
+                <li class="nav-item">
+                    <div class="nav-icon">R</div>
+                    <span>Reports</span>
+                </li>
+          
+            </ul>
+        </aside>
+        
+        <main class="main-content">
+       
+            
+            <div class="content-grid">
+                <div class="employee-card">
+                    <div class="employee-header">
+                        <div class="employee-actions">
+                            <button class="action-button">✏️</button>
+                            <button class="action-button">📥</button>
+                        </div>
+                        
+                        <div class="employee-photo" style="background-color: #4299e1; display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
+                            EA
+                        </div>
+                        
+                        <h2 class="employee-name">JIJO</h2>
+                        <div class="employee-position">Full Stack Developer</div>
+                        <div class="employee-status">Active Employee</div>
+                    </div>
+                    
+                    <div class="employee-details">
+                        <div class="details-group">
+                            <h3 class="details-title">
+                                <span>👤</span> Personal Information
+                            </h3>
+                            
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <div class="info-label">FULL NAME</div>
+                                    <div class="info-value">JIJO Mon</div>
+                                </div>
+                                
+                                <div class="info-item">
+                                    <div class="info-label">EMAIL</div>
+                                    <div class="info-value">jijo@company.com</div>
+                                </div>
+                                
+                                <div class="info-item">
+                                    <div class="info-label">PHONE NUMBER</div>
+                                    <div class="info-value">+91 (123) 123-4567</div>
+                                </div>
+                                
+                                <div class="info-item">
+                                    <div class="info-label">DATE OF BIRTH</div>
+                                    <div class="info-value">April 15, 1998</div>
+                                </div>
+                                
+                                <div class="info-item">
+                                    <div class="info-label">ADDRESS</div>
+                                    <div class="info-value">palarivattam,trivandrum,kerala</div>
+                                </div>
+                                
+                                <div class="info-item">
+                                    <div class="info-label">EMERGENCY CONTACT</div>
+                                    <div class="info-value">akhil (+91 555-987-6543)</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="details-group">
+                            <h3 class="details-title">
+                                <span>💼</span> Employment Details
+                            </h3>
+                            
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <div class="info-label">DEPARTMENT</div>
+                                    <div class="info-value">web Developer</div>
+                                </div>
+                                
+                                <div class="info-item">
+                                    <div class="info-label">POSITION</div>
+                                    <div class="info-value">Senior Full stack Developer</div>
+                                </div>
+                                
+                                <div class="info-item">
+                                    <div class="info-label">EMPLOYEE ID</div>
+                                    <div class="info-value">EMP-2025-089</div>
+                                </div>
+                                
+                                <div class="info-item">
+                                    <div class="info-label">JOIN DATE</div>
+                                    <div class="info-value">June 12, 2021</div>
+                                </div>
+                                
+                                <div class="info-item">
+                                    <div class="info-label">MANAGER</div>
+                                    <div class="info-value">Renjith ( Director)</div>
+                                </div>
+                                
+                                <div class="info-item">
+                                    <div class="info-label">EMPLOYMENT TYPE</div>
+                                    <div class="info-value">Full-time</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="calendar-card">
+                    <div class="calendar-header">
+                        <div class="calendar-title">Attendance Calendar</div>
+                        <div class="calendar-actions">
+                            <button class="calendar-button active">Month</button>
+                            <button class="calendar-button">Week</button>
+                            <button class="calendar-button">Day</button>
+                        </div>
+                    </div>
+                    <div class="calendar">
+                        <div class="month-nav">
+                            <div class="month-display" id="month-display"></div>
+                            <div class="month-arrows">
+                                <button class="month-arrow" id="prev-month">❮</button>
+                                <button class="month-arrow" id="next-month">❯</button>
+                            </div>
+                        </div>
+                        <div class="calendar-grid" id="calendar-days-header">
+                            <!-- Day headers will be added here -->
+                        </div>
+                        <div class="calendar-grid" id="calendar-days">
+                            <!-- Calendar days will be added here -->
+                        </div>
+                        <div class="legend">
+                            <div class="legend-title">Legend</div>
+                            <div class="legend-items">
+                                <div class="legend-item">
+                                    <div class="legend-color present"></div>
+                                    <div>Present</div>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-color absent"></div>
+                                    <div>Absent</div>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-color late"></div>
+                                    <div>Late</div>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-color leave"></div>
+                                    <div>Leave</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                <!-- Attendance Modal -->
+                <div class="attendance-modal" id="attendance-modal">
+                    <div class="attendance-dialog">
+                        <div class="attendance-header">
+                            <div class="attendance-title" id="modal-date">March 18, 2025</div>
+                            <button class="attendance-close" id="close-modal">×</button>
+                        </div>
+                        <div class="attendance-options">
+                            <div class="attendance-option present" data-status="present">Present</div>
+                            <div class="attendance-option absent" data-status="absent">Absent</div>
+                            <div class="attendance-option late" data-status="late">Late</div>
+                            <div class="attendance-option leave" data-status="leave">Leave</div>
+                        </div>
+                        <div class="attendance-buttons">
+                            <button class="attendance-button cancel" id="cancel-attendance">Cancel</button>
+                            <button class="attendance-button save" id="save-attendance">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+
+
+<script>
+    // Store attendance data
+    const attendanceData = {};
+    let currentDate = new Date();
+    let selectedDate = null;
+    let selectedDateString = null;
+    let selectedStatus = null;
+
+    // Initialize the calendar
+    function initCalendar() {
+        renderCalendarHeader();
+        updateMonthDisplay();
+        renderCalendarDays();
+        
+        // Add event listeners
+        document.getElementById('prev-month').addEventListener('click', prevMonth);
+        document.getElementById('next-month').addEventListener('click', nextMonth);
+        
+        // Modal event listeners
+        document.getElementById('close-modal').addEventListener('click', closeModal);
+        document.getElementById('cancel-attendance').addEventListener('click', closeModal);
+        document.getElementById('save-attendance').addEventListener('click', saveAttendance);
+        
+        // Add event listeners to attendance options
+        const options = document.querySelectorAll('.attendance-option');
+        options.forEach(option => {
+            option.addEventListener('click', function() {
+                options.forEach(opt => opt.classList.remove('selected'));
+                this.classList.add('selected');
+                selectedStatus = this.dataset.status;
+            });
+        });
+    }
+
+    // Render the calendar header (Sun, Mon, Tue, etc.)
+    function renderCalendarHeader() {
+        const daysHeader = document.getElementById('calendar-days-header');
+        const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        
+        days.forEach(day => {
+            const dayElement = document.createElement('div');
+            dayElement.classList.add('calendar-day-header');
+            dayElement.textContent = day;
+            daysHeader.appendChild(dayElement);
+        });
+    }
+
+    // Update the month and year display
+    function updateMonthDisplay() {
+        const monthDisplay = document.getElementById('month-display');
+        const options = { month: 'long', year: 'numeric' };
+        monthDisplay.textContent = currentDate.toLocaleDateString('en-US', options);
+    }
+
+    // Render the calendar days
+    function renderCalendarDays() {
+        const calendarDays = document.getElementById('calendar-days');
+        calendarDays.innerHTML = '';
+        
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth();
+        
+        // Create a date for the first day of the month
+        const firstDay = new Date(year, month, 1);
+        // Get the day of the week for the first day (0 = Sunday, 6 = Saturday)
+        const firstDayOfWeek = firstDay.getDay();
+        
+        // Create a date for the last day of the month
+        const lastDay = new Date(year, month + 1, 0);
+        const totalDays = lastDay.getDate();
+        
+        // Get the previous month's last day
+        const prevLastDay = new Date(year, month, 0).getDate();
+        
+        // Create the days from the previous month
+        for (let i = firstDayOfWeek; i > 0; i--) {
+            const day = prevLastDay - i + 1;
+            const date = new Date(year, month - 1, day);
+            const dayElement = createDayElement(day, 'inactive', date);
+            calendarDays.appendChild(dayElement);
+        }
+        
+        // Create the days for the current month
+        const today = new Date();
+        for (let i = 1; i <= totalDays; i++) {
+            const date = new Date(year, month, i);
+            const dateString = formatDate(date);
+            
+            const isToday = today.getDate() === i && 
+                            today.getMonth() === month && 
+                            today.getFullYear() === year;
+            
+            const isSelected = selectedDate && 
+                               selectedDate.getDate() === i && 
+                               selectedDate.getMonth() === month && 
+                               selectedDate.getFullYear() === year;
+            
+            let className = '';
+            if (isToday) className = 'today';
+            if (isSelected) className = 'selected';
+            
+            // Add attendance status class if exists
+            const attendanceStatus = attendanceData[dateString];
+            
+            const dayElement = createDayElement(i, className, date, attendanceStatus);
+            calendarDays.appendChild(dayElement);
+        }
+        
+        // Calculate how many days we need from the next month
+        const totalCells = 42; // 6 rows * 7 days
+        const remainingDays = totalCells - (firstDayOfWeek + totalDays);
+        
+        // Create the days from the next month
+        for (let i = 1; i <= remainingDays; i++) {
+            const date = new Date(year, month + 1, i);
+            const dayElement = createDayElement(i, 'inactive', date);
+            calendarDays.appendChild(dayElement);
+        }
+    }
+
+    // Create a day element
+    function createDayElement(day, className, date, attendanceStatus) {
+        const dayElement = document.createElement('div');
+        dayElement.classList.add('calendar-day');
+        if (className) dayElement.classList.add(className);
+        
+        // Add attendance status class if exists
+        if (attendanceStatus) {
+            dayElement.classList.add(attendanceStatus);
+        }
+        
+        dayElement.textContent = day;
+        
+        // Add attendance marker if status exists
+        if (attendanceStatus) {
+            const eventMarker = document.createElement('div');
+            eventMarker.classList.add('calendar-event', attendanceStatus);
+            dayElement.appendChild(eventMarker);
+        }
+        
+        // Add click event to select the day
+        dayElement.addEventListener('click', () => {
+            selectedDate = date;
+            selectedDateString = formatDate(date);
+            
+            // Don't allow marking past or future months
+            const today = new Date();
+            if (date.getMonth() !== currentDate.getMonth()) {
+                return;
+            }
+            
+            // Show attendance modal
+            showAttendanceModal(selectedDateString);
+            
+            renderCalendarDays();
+        });
+        
+        return dayElement;
+    }
+
+    // Format date to YYYY-MM-DD
+    function formatDate(date) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    }
+
+    // Format date to display format
+    function formatDisplayDate(dateString) {
+        const date = new Date(dateString);
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        return date.toLocaleDateString('en-US', options);
+    }
+
+    // Show attendance modal
+    function showAttendanceModal(dateString) {
+        const modal = document.getElementById('attendance-modal');
+        const modalDate = document.getElementById('modal-date');
+        modalDate.textContent = formatDisplayDate(dateString);
+        
+        // Reset selected status
+        const options = document.querySelectorAll('.attendance-option');
+        options.forEach(opt => opt.classList.remove('selected'));
+        
+        // Set selected status if exists
+        if (attendanceData[dateString]) {
+            const option = document.querySelector(`.attendance-option[data-status="${attendanceData[dateString]}"]`);
+            if (option) {
+                option.classList.add('selected');
+                selectedStatus = attendanceData[dateString];
+            }
+        } else {
+            selectedStatus = null;
+        }
+        
+        modal.classList.add('active');
+    }
+
+    // Close attendance modal
+    function closeModal() {
+        const modal = document.getElementById('attendance-modal');
+        modal.classList.remove('active');
+    }
+
+    // Save attendance
+    function saveAttendance() {
+        if (selectedStatus && selectedDateString) {
+            attendanceData[selectedDateString] = selectedStatus;
+            renderCalendarDays();
+        }
+        closeModal();
+    }
+
+    // Go to the previous month
+    function prevMonth() {
+        currentDate.setMonth(currentDate.getMonth() - 1);
+        updateMonthDisplay();
+        renderCalendarDays();
+    }
+
+    // Go to the next month
+    function nextMonth() {
+        currentDate.setMonth(currentDate.getMonth() + 1);
+        updateMonthDisplay();
+        renderCalendarDays();
+    }
+
+    // Initialize the calendar when the page loads
+    window.addEventListener('DOMContentLoaded', initCalendar);
+</script>
+</html>
